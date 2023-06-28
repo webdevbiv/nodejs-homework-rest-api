@@ -12,7 +12,6 @@ const { HttpError } = require("../../helpers");
 const avatarsDir = path.resolve("public", "avatars");
 
 const avatar = async (req, res, next) => {
-  console.log(req.file);
   const { error } = userAvatarSchema.validate(req.file);
 
   if (error) {

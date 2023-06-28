@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { isValidId } = require("../../middlewares");
+const { isValidId, authenticate } = require("../../middlewares");
 const contactsController = require("../../controllers/contacts/");
 const { errorWrapper } = require("../../decorators");
+
+router.use(authenticate);
 
 router.get("/", errorWrapper(contactsController.listContacts));
 router.post("/", errorWrapper(contactsController.addContact));

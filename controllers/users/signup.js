@@ -20,8 +20,8 @@ const signup = async (req, res, next) => {
   }
 
   const hashPassword = await bcrypt.hash(password, 10);
-
-  const newUser = await User.create({ ...req.body, password: hashPassword });
+  console.log(req);
+  const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL: req.avatarURL });
   res.status(201).json({
     user: {
       email: newUser.email,

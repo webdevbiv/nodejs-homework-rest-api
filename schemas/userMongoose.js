@@ -4,10 +4,7 @@ const { emailRegexp } = require("../constants/contacts");
 
 const userSchema = new Schema(
   {
-    // name: {
-    //   type: String,
-    //   required: true,
-    // },
+    avatarURL: String,
     email: {
       type: String,
       match: emailRegexp,

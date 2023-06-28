@@ -1,6 +1,6 @@
 const { contactAddSchema, contactUpdateFavoriteSchema } = require("./contactJoi");
 const contactSchema = require("./contactMongoose");
-const { userRegisterSchema, userLoginSchema } = require("./userJoi");
+const { userRegisterSchema, userLoginSchema, userAvatarSchema, userSubscriptionSchema } = require("./userJoi");
 const userSchema = require("./userMongoose");
 
 module.exports = {
@@ -10,4 +10,6 @@ module.exports = {
   userRegisterSchema,
   userSchema,
   userLoginSchema,
+  userAvatarSchema,
+  userSubscriptionSchema,
 };

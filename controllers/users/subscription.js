@@ -7,7 +7,7 @@ const subscription = async (req, res, next) => {
   const { error } = subscriptionSchema.validate(req.body);
 
   if (error) {
-    throw HttpError(400, "missing field subscription or subscription type is not correct");
+    throw HttpError(400, "Missing field subscription or subscription value is incorrect");
   }
   const { _id } = req.user;
   console.log(_id);

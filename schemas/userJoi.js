@@ -25,9 +25,14 @@ const userAvatarSchema = Joi.object({
   mimetype: Joi.string().valid("image/jpeg", "image/png", "image/gif").required(),
 });
 
+const userEmailSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+});
+
 module.exports = {
   userRegisterSchema,
   userLoginSchema,
   userSubscriptionSchema,
   userAvatarSchema,
+  userEmailSchema,
 };

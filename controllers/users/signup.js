@@ -1,9 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { nanoid } = require("nanoid");
-const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const { BASE_URL, SECRET_KEY } = process.env;
 
 const User = require("../../models/user");
 
@@ -28,7 +26,6 @@ const signup = async (req, res, next) => {
   const hashPassword = await bcrypt.hash(password, 10);
   const verificationToken = nanoid();
 
-  // const verificationToken = jwt.sign(payload, SECRET_KEY);
 
   const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL: req.avatarURL, verificationToken });
 

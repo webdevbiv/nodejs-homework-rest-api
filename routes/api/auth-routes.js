@@ -14,5 +14,7 @@ router.post("/logout", authenticate, errorWrapper(authController.logout));
 router.get("/current", authenticate, authController.getCurrent);
 router.patch("/", authenticate, errorWrapper(authController.subscription));
 router.patch("/avatars", authenticate, upload.single("avatar"), errorWrapper(authController.avatar));
+router.get("/verify/:verificationToken", errorWrapper(authController.verify));
+router.post("/verify", errorWrapper(authController.resendVerify));
 
 module.exports = router;

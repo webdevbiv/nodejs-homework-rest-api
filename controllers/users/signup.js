@@ -1,10 +1,16 @@
 const bcrypt = require("bcryptjs");
+const { nanoid } = require("nanoid");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+const { BASE_URL, SECRET_KEY } = process.env;
 
 const User = require("../../models/user");
 
-const { HttpError } = require("../../helpers");
+const { HttpError, sendEmail } = require("../../helpers");
 
 const { userRegisterSchema } = require("../../schemas/userJoi");
+const verifyEmail = require("../../constants/emailTemp");
 
 const signup = async (req, res, next) => {
   const { error } = userRegisterSchema.validate(req.body);
@@ -20,8 +26,14 @@ const signup = async (req, res, next) => {
   }
 
   const hashPassword = await bcrypt.hash(password, 10);
-  console.log(req);
-  const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL: req.avatarURL });
+  const verificationToken = nanoid();
+
+  // const verificationToken = jwt.sign(payload, SECRET_KEY);
+
+  const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL: req.avatarURL, verificationToken });
+
+  await sendEmail(verifyEmail(email, verificationToken));
+
   res.status(201).json({
     user: {
       email: newUser.email,
